@@ -1,0 +1,31 @@
+<h3>Issues List</h3>
+
+<p>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default">{{perPage}}</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Per Page</span>
+    </button>
+    <ul class="dropdown-menu selectable" role="menu">
+      <li ng-repeat="p in avlPages track by $index"><a ng-click="changePerPage(p)"><i class="glyphicon glyphicon-ok" ng-show="p == perPage"></i> {{p}} issues</a></li>
+    </ul>
+  </div>
+  <span>items per page</span>
+</p>
+
+<p ng-show="loading">Fetching data ...</p>
+
+<div class="alert alert-info" ng-show="message" ng-animate="{show: 'animate-enter'}">{{message}}</div>
+<ul class="list-group" ng-hide="loading || message">
+  <li class="list-group-item list-group-header">
+    <strong>{{issues.length}} issues</strong>
+  </li>
+  <li class="list-group-item" ng-repeat="issue in issues">
+    <span class="badge" ng-class="issue.state">#{{issue.number}}</span>
+    <h4 class="list-group-item-heading"><a class="issue-link" href="{{issue.url}}">{{issue.title}}</a></h4>
+    <p class="list-group-item-text text-muted"><small>opened on {{issue.created_at}}</small></p>
+  </li>
+</ul>
+
+<pagination total-pages="totalPages" current-page="currentPage" change-page="changePage"></pagination>

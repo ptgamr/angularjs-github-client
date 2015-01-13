@@ -1,0 +1,43 @@
+<div class="jumbotron">
+  <p class="lead">
+    <img src="images/Octocat.png" alt="I'm Yeoman"><br>
+  </p>
+  <h1>Issues Finder</h1>
+  <p>Enter github username and repository here</p>
+  <form ng-submit="searchAction()">
+
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-user"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Username" ng-model="user">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-inbox"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Repository" ng-model="repo">
+    </div>
+
+    <div>
+      <button class="btn btn-success btn-block" type="submit">Find Issues <i class="glyphicon glyphicon-search"></i> </button>
+    </div>
+
+  </form>
+</div>
+
+<div class="row marketing">
+  <h4>HTML5 Boilerplate</h4>
+  <p>
+    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+  </p>
+
+  <h4>Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <h4>Karma</h4>
+  <p>Spectacular Test Runner for JavaScript.</p>
+</div>

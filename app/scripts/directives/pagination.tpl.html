@@ -1,0 +1,7 @@
+<nav>
+  <ul class="pagination">
+    <li ng-repeat="page in pages track by $index" ng-class="{'active': page == currentPage, 'disabled': page == '...'}">
+      <a class="no-focus" href="javascript:;" ng-click="page != '...' && gotoPage(page)">{{page}}</a>
+    </li>
+  </ul>
+</nav>
