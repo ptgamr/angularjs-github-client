@@ -30,7 +30,8 @@
   </li>
   <li class="list-group-item repeat-item" ng-repeat="issue in issues" >
     <span class="badge" ng-class="issue.state">#{{issue.number}}</span>
-    <h4 class="list-group-item-heading"><a class="issue-link" href="{{issue.url}}">{{issue.title}}</a></h4>
-    <p class="list-group-item-text text-muted"><small>opened on {{issue.created_at}}</small></p>
+    <h4 class="list-group-item-heading"><a class="issue-link" href="javascript:;" ng-click="navigate(issue.number)">{{issue.title}}</a></h4>
+    <p class="list-group-item-text text-muted"><small><a href="{{issue.user.html_url}}" target="_blank"><b>{{issue.user.login}}</b></a> opened on {{issue.created_at}}</small></p>
+    <img class="avatar img-circle" ng-src="{{issue.user.avatar_url}}" width="50" />
   </li>
 </ul>

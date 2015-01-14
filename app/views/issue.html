@@ -1,0 +1,32 @@
+
+<p class="back-to-list"><a href="javascript:;" ng-click="backToList()"><i class="fa fa-chevron-left"></i> Back To List</a></p>
+
+
+<div ng-show="apiMessage" class="alert alert-info">
+  {{apiMessage}}
+</div>
+<div ng-hide="apiMessage">
+  <h3>{{issue.title}} <span class="text-muted">#{{issue.number}}</span></h3>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <img class="img-thumbnail" width="50" ng-src="{{issue.user.avatar_url}}">
+    </div>
+    <div class="col-xs-10">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>{{issue.user.login}}</strong>
+        </div>
+        <div class="panel-body">
+          {{issue.body}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-repeat="comment in comments">
+    <div class="col-md-2">
+      <img class="img-thumbnail" width="50" ng-src="{{comment.user.avatar_url}}">
+    </div>
+  </div>
+</div>

@@ -31,6 +31,10 @@ angular
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl'
       })
+      .when('/issue/:user/:repo/:number', {
+        templateUrl: 'views/issue.html',
+        controller: 'IssueCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

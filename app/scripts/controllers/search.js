@@ -8,7 +8,7 @@
  * Controller of the angularGithubClientApp
  */
 angular.module('angularGithubClientApp')
-  .controller('SearchCtrl', function ($scope, $routeParams, GithubIssues) {
+  .controller('SearchCtrl', function ($scope, $location, $routeParams, GithubIssues) {
 
     function getURLParameter(url, name) {
       return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url)||[,""])[1].replace(/\+/g, '%20'))||null;
@@ -84,6 +84,10 @@ angular.module('angularGithubClientApp')
         }
       );
     }
+
+    $scope.navigate = function(issueNumber) {
+      $location.path(['', 'issue', $scope.user, $scope.repo, issueNumber, ''].join('/'));
+    };
 
     $scope.fetch();
 
