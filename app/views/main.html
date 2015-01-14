@@ -10,7 +10,7 @@
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-user"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Username" ng-model="user" ng-blur="loadSuggestion()">
+      <input type="text" class="form-control" placeholder="Username" ng-model="user">
     </div>
 
     <div class="input-group">
@@ -24,12 +24,14 @@
           <div class="suggestion-item text-center" ng-show="suggestionLoading"><i class="fa fa-spin fa-spinner fa-log"></i> Fetching repositories ...</div>
           <div class="suggestion-item hover" ng-repeat="suggestion in suggestions | filter: {name: repo}" ng-click="showRepo(suggestion.name)">{{suggestion.name}}</div>
         </div>
-        <input type="text" class="form-control" placeholder="Repository" ng-model="repo" ng-focus="displaySuggestion()" ng-blur="timeoutHideSuggestion()">
+        <input type="text" class="form-control" placeholder="Repository" ng-model="repo" ng-focus="loadSuggestion()" ng-blur="timeoutHideSuggestion()" ng-click="$event.stopPropagation();">
       </div>
     </div>
 
+    <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+
     <div>
-      <button class="btn btn-success btn-block" type="submit">Find Issues <i class="glyphicon glyphicon-search"></i> </button>
+      <button id="search-btn" class="btn btn-success btn-block" type="submit">Find Issues <i class="glyphicon glyphicon-search"></i> </button>
     </div>
 
   </form>

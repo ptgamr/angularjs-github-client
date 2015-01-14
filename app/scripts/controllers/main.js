@@ -8,16 +8,24 @@
  * Controller of the angularGithubClientApp
  */
 angular.module('angularGithubClientApp')
-  .controller('MainCtrl', function ($scope, $location, GithubRepositories, $timeout) {
+  .controller('MainCtrl', function ($scope, $location, GithubRepositories, $timeout, $window) {
 
     $scope.displaySuggestion = false;
     $scope.suggestionLoading = false;
     $scope.suggestionMessage = '';
+    $scope.errorMessage = '';
+    $scope.user = '';
     $scope.repo = '';
+    var lastUser = '';
 
     $scope.searchAction = function() {
-      var user = $scope.user || 'yeoman',
-          repo = $scope.repo || 'generator-angular';
+      var user = $scope.user,
+          repo = $scope.repo;
+
+      if (!user || !repo) {
+        $scope.errorMessage = 'Username and Repository must not be empty.';
+        return;
+      }
       
       $location.path(['', 'search', user, repo, ''].join('/'));
     };
@@ -35,25 +43,32 @@ angular.module('angularGithubClientApp')
       if (!$scope.user) return;
 
       $scope.suggestionDisplay = true;
-      $scope.suggestionLoading = true;
-      $scope.suggestionMessage = '';
 
-      GithubRepositories.get({
-        username: $scope.user
-      }, function(res) {
-        $scope.suggestionLoading = false;
+      if ($scope.user !== lastUser) {
 
-        if (res.data.message) {
-          $scope.suggestionMessage = res.data.message;
-          return;
-        }
+        $scope.suggestionLoading = true;
+        $scope.suggestionMessage = '';
 
-        if (!res.data || !res.data.length) {
-          $scope.suggestionMessage = 'No repo found.';
-        }
+        lastUser = $scope.user;
 
-        $scope.suggestions = res.data;
-      })
+        GithubRepositories.get({
+          username: $scope.user
+        }, function(res) {
+          $scope.suggestionLoading = false;
+
+          if (res.data.message) {
+            $scope.suggestionMessage = res.data.message;
+            return;
+          }
+
+          if (!res.data || !res.data.length) {
+            $scope.suggestionMessage = 'No repo found.';
+          }
+
+          $scope.suggestions = res.data;
+        })
+      }
+
     };
 
     /**
@@ -73,5 +88,10 @@ angular.module('angularGithubClientApp')
         $scope.suggestionDisplay = true;
       }
     }
+
+    $window.onclick = function (event) {
+      $scope.suggestionDisplay = false;
+      $scope.$apply();
+    };
 
   });
