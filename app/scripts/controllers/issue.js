@@ -37,7 +37,7 @@ angular.module('angularGithubClientApp')
 
     //load comments
     GithubIssues.get(
-      {owner: $scope.user, repo: $scope.repo, number: $scope.number, comment: 'comments'},
+      {owner: $scope.user, repo: $scope.repo, number: $scope.number, comments: 'comments'},
       function(res){
 
         if (res.data.message) {

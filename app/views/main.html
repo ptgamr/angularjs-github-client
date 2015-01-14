@@ -22,7 +22,7 @@
           <div class="suggestion-item text-center">Select a Repository</div>
           <div class="suggestion-item text-center" ng-show="suggestionMessage">{{suggestionMessage}}</div>
           <div class="suggestion-item text-center" ng-show="suggestionLoading"><i class="fa fa-spin fa-spinner fa-log"></i> Fetching repositories ...</div>
-          <div class="suggestion-item hover" ng-repeat="suggestion in suggestions | filter: {name: repo}" ng-click="showRepo(suggestion.name)">{{suggestion.name}}</div>
+          <div class="suggestion-item hover" ng-repeat="suggestion in suggestions | filter: {name: repo}" ng-click="showRepo(suggestion.name); $event.stopPropagation();">{{suggestion.name}}</div>
         </div>
         <input type="text" class="form-control" placeholder="Repository" ng-model="repo" ng-focus="loadSuggestion()" ng-blur="timeoutHideSuggestion()" ng-click="$event.stopPropagation();">
       </div>
