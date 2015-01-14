@@ -42,6 +42,7 @@ angular.module('angularGithubClientApp')
     $scope.fetch = function() {
       
       $scope.loading = true;
+      $scope.issues = [];
 
       GithubIssues.get(
         {owner: $scope.user, repo: $scope.repo, per_page: $scope.perPage, page: $scope.currentPage},
@@ -59,21 +60,24 @@ angular.module('angularGithubClientApp')
 
           $scope.message = '';
 
-          //get the last & prev link to calculate pageCount
-          for(var i = 0 ; i < links.length; i++) {
-            var link = links[i];
-            if(link[1].rel === 'last') {
-              lastLink = link[0];
-            } else if (link[1].rel === 'prev') {
-              prevLink = link[0];
+          if (links && links.length) {
+            //get the last & prev link to calculate pageCount
+            for(var i = 0 ; i < links.length; i++) {
+              var link = links[i];
+              if(link[1].rel === 'last') {
+                lastLink = link[0];
+              } else if (link[1].rel === 'prev') {
+                prevLink = link[0];
+              }
             }
+            //calculate pageCount
+            if (lastLink)    
+              pageCount = parseInt(getURLParameter(lastLink, 'page'));
+            else
+              pageCount = parseInt(getURLParameter(prevLink, 'page')) + 1;
+          } else {
+            pageCount = 1;
           }
-
-          //calculate pageCount
-          if (lastLink)    
-            pageCount = parseInt(getURLParameter(lastLink, 'page'));
-          else
-            pageCount = parseInt(getURLParameter(prevLink, 'page')) + 1;
 
           $scope.issues = res.data;
           $scope.totalPages = pageCount;

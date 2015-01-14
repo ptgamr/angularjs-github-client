@@ -93,18 +93,85 @@ body {
 }
 
 .no-focus:focus {
-  background-color: none !important;
-};
-
-
-.animate-enter {
-  -webkit-transition: 1s linear all; /* Chrome */
-  transition: 1s linear all;
-  opacity: 0;
+  background-color: #fff !important;
 }
- 
-.animate-enter.animate-enter-active {
+
+ul.pagination {
+  margin: 0;
+}
+
+
+/**
+ * SUGGESTION
+ */
+
+.input-group-control {
+  display: table-cell;
+  position: relative;
+}
+
+.suggestion-list {
+  background-color: #fff;
+  position: absolute;
+  top: 33px;
+  width: 100%;
+  z-index: 100;
+  max-height: 200px;
+  overflow: scroll;
+  border: 1px solid #ccc;
+}
+
+  .suggestion-item {
+    background-color: #eee;
+    padding: 10px 15px;
+    text-align: left;
+  }
+
+  .suggestion-item.hover {
+    background-color: #fff;
+  }
+
+  .suggestion-item.hover:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+
+.fadein,
+.fadeout {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+}
+
+.fadein.ng-hide-remove,
+.fadeout.ng-hide-add.ng-hide-add-active {
+  opacity: 0;
+  display: block !important;
+}
+
+.fadeout.ng-hide-add,
+.fadein.ng-hide-remove.ng-hide-remove-active {
   opacity: 1;
+  display: block !important;
+}
+
+
+/* you can also define the transition style
+   on the base class as well (.repeat-item) */
+.repeat-item.ng-enter,
+.repeat-item.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.repeat-item.ng-enter,
+.repeat-item.ng-leave.ng-leave-active {
+  opacity:0;
+}
+.repeat-item.ng-leave,
+.repeat-item.ng-enter.ng-enter-active {
+  opacity:1;
 }
 
 /* Responsive: Portrait tablets and up */

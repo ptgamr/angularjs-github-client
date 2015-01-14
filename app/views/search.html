@@ -12,20 +12,25 @@
     </ul>
   </div>
   <span>items per page</span>
+
+  <pagination total-pages="totalPages" current-page="currentPage" change-page="changePage" class="pull-right"></pagination>
+  <div class="clearfix"></div>
 </p>
 
-<p ng-show="loading">Fetching data ...</p>
+<!-- LOADING MESSAGE -->
 
-<div class="alert alert-info" ng-show="message" ng-animate="{show: 'animate-enter'}">{{message}}</div>
-<ul class="list-group" ng-hide="loading || message">
+<!-- ERROR MESSAGE -->
+<div class="alert alert-info fadein fadeout" ng-show="message">{{message}}</div>
+
+<!-- ISSUES TABLE -->
+<ul class="list-group" ng-hide="message">
   <li class="list-group-item list-group-header">
     <strong>{{issues.length}} issues</strong>
+    <i ng-show="loading" class="fa fa-circle-o-notch fa-spin fa-lg pull-right fadein fadeout"></i>
   </li>
-  <li class="list-group-item" ng-repeat="issue in issues">
+  <li class="list-group-item repeat-item" ng-repeat="issue in issues" >
     <span class="badge" ng-class="issue.state">#{{issue.number}}</span>
     <h4 class="list-group-item-heading"><a class="issue-link" href="{{issue.url}}">{{issue.title}}</a></h4>
     <p class="list-group-item-text text-muted"><small>opened on {{issue.created_at}}</small></p>
   </li>
 </ul>
-
-<pagination total-pages="totalPages" current-page="currentPage" change-page="changePage"></pagination>

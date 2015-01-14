@@ -10,14 +10,22 @@
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-user"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Username" ng-model="user">
+      <input type="text" class="form-control" placeholder="Username" ng-model="user" ng-blur="loadSuggestion()">
     </div>
 
     <div class="input-group">
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-inbox"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Repository" ng-model="repo">
+      <div class="input-group-control">
+        <div class="suggestion-list" ng-show="suggestionDisplay">
+          <div class="suggestion-item text-center">Select a Repository</div>
+          <div class="suggestion-item text-center" ng-show="suggestionMessage">{{suggestionMessage}}</div>
+          <div class="suggestion-item text-center" ng-show="suggestionLoading"><i class="fa fa-spin fa-spinner fa-log"></i> Fetching repositories ...</div>
+          <div class="suggestion-item hover" ng-repeat="suggestion in suggestions | filter: {name: repo}" ng-click="showRepo(suggestion.name)">{{suggestion.name}}</div>
+        </div>
+        <input type="text" class="form-control" placeholder="Repository" ng-model="repo" ng-focus="displaySuggestion()" ng-blur="timeoutHideSuggestion()">
+      </div>
     </div>
 
     <div>
@@ -25,19 +33,4 @@
     </div>
 
   </form>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
 </div>

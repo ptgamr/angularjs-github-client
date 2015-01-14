@@ -8,6 +8,14 @@
  * Service in the angularGithubClientApp.
  */
 angular.module('angularGithubClientApp')
-  .service('GithubRepositories', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+  .factory('GithubRepositories', function ($resource) {
+    return $resource("https://api.github.com/users/:username/repos", {
+      'callback': 'JSON_CALLBACK',
+      'per_page': 20,
+      'page': 1
+    }, {
+      get: {
+        method: 'JSONP'
+      }
+    });
   });
