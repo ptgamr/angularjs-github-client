@@ -1,6 +1,9 @@
 # angularjs-github-client
 A Simple AngularJS app which comsumes Github REST API 
 
+### Live Demo
+http://ptgamr.github.io/angularjs-github-client/#/
+
 ### Features
 
 * Create an input form where users can enter the owner and the name of a Github repository. Upon pressing “search”, this feature should retrieve a list of issues of the given Github repository. Each of the issues should be displayed with its number, title, and creation date in tabular format for the user to browse.
